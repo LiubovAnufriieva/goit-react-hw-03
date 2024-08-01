@@ -1,9 +1,22 @@
-.itemContainer {
-    border: 1px solid black;
+.container {
     display: flex;
-    flex-direction: column;
-    
-    padding: 20px;
-    border-radius: 8px;
-
-}
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    width: 320px;
+    padding: 10px;
+  
+    border: 1px solid black;
+    border-radius: 6px;
+  }
+  
+  .text {
+    margin: 0;
+  
+    font-size: 500;
+  }
+  
+  .btn {
+    border: 1px solid black;
+    border-radius: 6px;
+  }

@@ -1,36 +1,50 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import SearchBox from "./SearchBox/SearchBox";
-import initialContacts from "../contacts.json";
+import initialContacts from "../data/initialContacts.json";
 import ContactList from "./ContactList/ContactList";
 import ContactForm from "./ContactForm/ContactForm";
-import "./App.css";
+import css from "./App.module.css";
 
-export default function App() {
-  const [contacts, setContacts] = useState(initialContacts);
-  const [filter, setFilter] = useState("");
+function App() {
+  const [contacts, setContacts] = useState(() => {
+  const saveContacts = localStorage.getItem("contacts");
+  return saveContacts
+    ? JSON.parse(saveContacts)
+    :initialContacts;
+});
+  const [filter, setFilter] = useState('');
 
-  const addContact = (newContact) => {
-    setContacts((allContacts) => {
-      return [...allContacts, newContact];
-    });
-  };
+  const addContact =(newUser)=> {
+      console.log(newUser);
+      setContacts((prevContacts) => {
+          return [...prevContacts, newUser]
+      })
+  }
 
-  const deleteContact = (contactId) => {
-    setContacts((allContacts) => {
-      return allContacts.filter((contact) => contact.id !== contactId);
-    });
-  };
+  const deleteContact =(contactId) =>{
+      setContacts((prevContacts) => {
+          return prevContacts.filter((contact) => contact.id !== contactId)
+         
+      })
+      
+  }
 
-  const visibleContacts = contacts.filter((contact) =>
-    contact.text.toLowerCase().includes(filter.toLowerCase())
-  );
+  const visibleContacts = contacts.filter((contact) => contact.name.toLowerCase().includes(filter.toLowerCase()))
+      
+ useEffect(() => {
+   localStorage.setItem("contacts", JSON.stringify(contacts));
+ }, [contacts]);
 
+  
   return (
-    <div className={container}>
-      <h1>Phonebook</h1>
+    <div className={css.container}>
+      <h1 className={css.title}>Phonebook</h1>
       <ContactForm onAdd={addContact} />
       <SearchBox value={filter} onFilter={setFilter} />
-      <ContactList value={visibleContacts} onDelete={deleteContact} />
+      <ContactList contacts={visibleContacts} onDelete={deleteContact} />
     </div>
   );
 }
+
+
+export default App;

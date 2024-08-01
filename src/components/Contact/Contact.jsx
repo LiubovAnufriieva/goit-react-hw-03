@@ -6,9 +6,9 @@ const Contact=({ data: { id, name, number }, onDelete })=> {
   return (
     <div className={css.container}>
       <div className={css.text}>
-        <p><FaUser />   {name}</p>
+        <p><FaUser className={css.contactIcon}/>   {name}</p>
 
-        <p><FaPhone />   {number}</p>
+        <p><FaPhone className={css.contactIcon}/>   {number}</p>
       </div>
       <button className={css.btn} onClick={() => onDelete(id)}>
         Delete

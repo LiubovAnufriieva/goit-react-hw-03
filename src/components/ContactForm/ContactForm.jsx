@@ -39,7 +39,7 @@ const ContactForm = ({ onAdd }) => {
     >
       <Form className={css.form}>
         <div className={css.formGroup}>
-          <label htmlFor="name">
+          <label htmlFor="name" className={css.label}>
             Name
           </label>
           <Field

@@ -5,9 +5,9 @@ import Contact from "../Contact/Contact";
 const ContactList=({contacts, onDelete})=> {
   return (
       <ul className={css.item}>
-          {contacts.map((contact) => (
-              <li className={css.item} key={contact.id}>
-                  <Contact data={contact} onDelete={onDelete} />
+          {contacts.map(({ id, name, number }) => (
+              <li className={css.item} key={id}>
+                  <Contact key={id} id={id} name={name} number={number} onDelete={onDelete} />
               </li>
           ))}           
       </ul>

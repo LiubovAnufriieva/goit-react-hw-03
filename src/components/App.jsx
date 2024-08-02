@@ -7,35 +7,34 @@ import css from "./App.module.css";
 
 function App() {
   const [contacts, setContacts] = useState(() => {
-  const saveContacts = localStorage.getItem("contacts");
-  return saveContacts
-    ? JSON.parse(saveContacts)
-    :initialContacts;
-});
-  const [filter, setFilter] = useState('');
+    const saveContacts = localStorage.getItem("contacts");
+    return saveContacts ? JSON.parse(saveContacts) : initialContacts;
+  });
+  const [filter, setFilter] = useState("");
 
-  const addContact =(newUser)=> {
-      console.log(newUser);
-      setContacts((prevContacts) => {
-          return [...prevContacts, newUser]
-      })
-  }
+  const addContact = (newContact) => {
+    console.log(newContact);
+    setContacts((prevContacts) => {
+      return [...prevContacts, newContact];
+    });
+  };
 
-  const deleteContact =(contactId) =>{
-      setContacts((prevContacts) => {
-          return prevContacts.filter((contact) => contact.id !== contactId)
-         
-      })
-      
-  }
+  const deleteContact = (contactId) => {
+    setContacts((prevContacts) => {
+      return prevContacts.filter((contact) => contact.id !== contactId);
+    });
+  };
 
-  const visibleContacts = contacts.filter((contact) => contact.name.toLowerCase().includes(filter.toLowerCase()))
-      
- useEffect(() => {
-   localStorage.setItem("contacts", JSON.stringify(contacts));
- }, [contacts]);
+  const visibleContacts = contacts.filter((contact) =>
+    contact.name.toLowerCase().includes(filter.toLowerCase())
+  );
 
-  
+  useEffect(() => {
+    localStorage.setItem("contacts", JSON.stringify(contacts));
+  }, [contacts]);
+
+  console.log(contacts);
+
   return (
     <div className={css.container}>
       <h1 className={css.title}>Phonebook</h1>
@@ -45,6 +44,5 @@ function App() {
     </div>
   );
 }
-
 
 export default App;

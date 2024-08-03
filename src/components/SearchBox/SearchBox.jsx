@@ -10,6 +10,7 @@ const SearchBox =({ value, onFilter })=> {
         type="text"
         value={value}
         onChange={(e) => onFilter(e.target.value)}
+        placeholder="Enter the name..."
       />
     </div>
   );
